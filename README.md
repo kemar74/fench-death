@@ -39,7 +39,7 @@ Acceder à [PhpMyAdmin](http://localhost/phpmyadmin/) et se connecter (login : r
 
 ## 3. Import des donnees CSV sous MySQL
 Créer une base de données "project_db" avec le bouton "Nouvelle base de données" dans le menu de gauche.
-[https://ibb.co/94b0znW]  
+![https://ibb.co/94b0znW][db_creation]  
 Acceder à l'onglet "SQL"  
 Lancer la commande suivante (en remplaçant ```A:/Uni-Nantes/BDD evoluee/Projet/``` par le chemin de votre dossier) :
 ```sql 
@@ -186,3 +186,4 @@ Le dernier fichier peut durer quelques minutes.
 ## 4. Faire la suite
 Voilà.
 
+[db_creation]: https://i.ibb.co/n17yZrj/new-db.png "Creation d'une base de données"
