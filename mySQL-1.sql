@@ -1,5 +1,6 @@
 DROP DATABASE IF EXISTS `project_db`;
 CREATE DATABASE `project_db`;
+USE `project_db`;
 
 DROP TABLE IF EXISTS `project_db`.`net_salary_per_town_categories`;
 DROP TABLE IF EXISTS `project_db`.`population`;
