@@ -39,8 +39,9 @@ hostname
 username
 password
 ```
-Les valeurs dans le fichier sont corrects pour les utilisateurs souhaitant executer le script en local avec le login "root" sans mot de passe.  
-Lancez l'executable "db_installer.exe", patientez (cela peut durer au moins 10 minutes).  
+Les valeurs dans le fichier sont corrects pour les utilisateurs souhaitant executer le script en local avec le login "root" sans mot de passe.   
+Lancez l'executable "db_installer.exe", patientez (cela peut durer au moins 10 minutes).   
+Si une erreur apparait lors de l'installation (du type "[WARN] MySQLError during execute statement", recopiez la commande sur PhpMyAdmin (http://localhost/phpmyadmin/db_sql.php?db=project_db) pour l'executer manuellement, puis continuez le programme en appuyant sur < ENTRER >.   
 Les données sont là!  
 La BDD ressemble à cela :  
 ![db_done]
