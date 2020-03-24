@@ -50,7 +50,7 @@ try:
 	if verbose : 
 		print("Reading file...")
 	for line in lines:
-		line.replace(filepath_to_replace, os.getcwd() + os.path.sep)
+		line = line.replace(filepath_to_replace, os.getcwd() + os.path.sep)
 		if line.strip().startswith('--'):  # ignore sql comment lines
 			continue
 		if not line.strip().endswith(';'):  # keep appending lines that don't end in ';'
