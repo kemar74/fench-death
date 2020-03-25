@@ -22,9 +22,12 @@ Description : Données relatives à chaque ville de France : population, economi
 - Pour Windows
 [WAMP](http://www.wampserver.com/) : Installer le logiciel WAMP  
 Lancer le logiciel.   
-Acceder à [PhpMyAdmin](http://localhost/phpmyadmin/) et se connecter (login : root, password : aucun)  
 
 - Pour Linux  
+[XAMPP](https://www.apachefriends.org/fr/index.html) : Installer le logiciel XAMPP  
+Lancez XAMPP Control Panel.  
+
+- Pour Mac  
 Demerdez-vous, j'ai aucune idée...  
 
 
@@ -40,6 +43,16 @@ username
 password
 ```
 Les valeurs dans le fichier sont corrects pour les utilisateurs souhaitant executer le script en local avec le login "root" sans mot de passe.   
+*Attention : Le programme db_installer risque de rencontrer des erreurs lors de l'importation des données. Pour éviter cela, desactivez l'option "--secure-file-priv" de MySQL (et/ou MariaDB) en modifiant le fichier "my.ini" .  
+<ins>Avec WAMP:</ins>  
+![my_ini_wamp]  
+Trouvez le fichier my.ini, puis commentez la ligne "secure_file_serv=..." en insérant un ";" (point-virgule) devant. Enregistrez.  
+<ins>Avec XAMPP:</ins>  
+![my_ini_xampp]  
+Trouvez le fichier my.ini, puis commentez la ligne "secure_file_serv=..." en insérant un "#" (croisillon ou hash) devant. Enregistrez.*  
+  
+*Enfin, relancez votre serveur local XAMPP ou WAMP*  
+  
 Lancez l'executable "db_installer.exe", patientez (cela peut durer au moins 10 minutes).   
 Si une erreur apparait lors de l'installation (du type "[WARN] MySQLError during execute statement", recopiez la commande sur PhpMyAdmin (http://localhost/phpmyadmin/db_sql.php?db=project_db) pour l'executer manuellement, puis continuez le programme en appuyant sur < ENTRER >.   
 Les données sont là!  
@@ -84,3 +97,5 @@ Le dernier fichier peut durer quelques minutes.
 
 [db_creation]: https://i.ibb.co/n17yZrj/new-db.png "Creation d'une base de données"
 [db_done]: https://i.ibb.co/jLVq67M/tables.png "Resumé des tables"
+[my_ini_wamp]: https://zupimages.net/up/20/13/3h8g.png
+[my_ini_xampp]: https://zupimages.net/up/20/13/vz83.png
