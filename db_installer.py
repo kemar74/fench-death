@@ -5,6 +5,7 @@ import mysql.connector
 import glob
 import requests
 import os
+import shutil
 
 # Thanks to nonbeing (https://stackoverflow.com/a/19159041/9863298)
 
@@ -15,6 +16,7 @@ verbose = True
 sqlURL = "https://raw.githubusercontent.com/kemar74/french-death/master/" + "mySQL-1.sql"
 filepath_to_replace = "A:/Uni-Nantes/BDD evoluee/Projet/"
 db_name = "project_db"
+current_path = os.path.normcase(os.path.normpath(os.path.realpath(os.getcwd()))) + os.path.sep
 try:
 	print("Opening database...")
 	login = open("db_login.txt", "r").readlines()
@@ -36,7 +38,6 @@ try:
 	if not mydb:
 		raise Exception("Unable to connect to MySQL on {}@{}".format(usr, host))
 	print("Connected!")
-
 	mycursor = mydb.cursor()
 	if verbose:
 		print("\n[INFO] Executing SQL script file: '%s'" % (sqlURL))
@@ -50,7 +51,7 @@ try:
 	if verbose : 
 		print("Reading file...")
 	for line in lines:
-		line = line.replace(filepath_to_replace, os.getcwd() + os.path.sep)
+		line = line.replace(filepath_to_replace, current_path).replace("\\", "\\\\")
 		if line.strip().startswith('--'):  # ignore sql comment lines
 			continue
 		if not line.strip().endswith(';'):  # keep appending lines that don't end in ';'
@@ -72,6 +73,7 @@ try:
 			except:
 				print("\n[WARN] MySQLError during execute statement \n>\t", statement)
 				input("Copy-paste this line in PhpMyAdmin to execute it directly, then press ENTER to continue the program")
+
 	print("All done!")
 except Exception as e:
 	print("Error : ", e)
