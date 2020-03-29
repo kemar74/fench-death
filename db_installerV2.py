@@ -108,9 +108,9 @@ try:
 	print("Import datas")
 	files = get_csv_files(current_path)
 	for i,file in enumerate(files):
+		print("fill " + file.replace(".csv", "") + " table")
 		if verbose:
 			print(round((i+1)/len(files)*100), "%")
-		print("fill " + file.replace(".csv", "") + " table")
 		with open('C:/Users/Moi/Documents/Cours/bdde/french-death/' + file, encoding='utf-8') as csvfile:
 			reader = csv.DictReader(csvfile, delimiter = ',')
 			sql_statement = prepare_statement(reader.fieldnames, file.replace(".csv", ""))
