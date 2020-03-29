@@ -124,28 +124,28 @@ CREATE TABLE `project_db`.`population_no_moco` (
 PRIMARY KEY (`CODGEO`, `AGEQ80_17`, `SEXE`)) 
 ENGINE = MyISAM;
 
-LOAD DATA LOCAL INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/base_etablissement_par_tranche_effectif.csv'
+LOAD DATA INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/base_etablissement_par_tranche_effectif.csv' IGNORE
 INTO TABLE project_db.base_etablissement_par_tranche_effectif
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/name_geographic_information.csv'
+LOAD DATA INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/name_geographic_information.csv' IGNORE
 INTO TABLE project_db.name_geographic_information
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/net_salary_per_town_categories.csv'
+LOAD DATA INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/net_salary_per_town_categories.csv' IGNORE
 INTO TABLE project_db.net_salary_per_town_categories
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/population.csv'
+LOAD DATA INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/population.csv' IGNORE
 INTO TABLE project_db.population
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
