@@ -13,7 +13,7 @@ import shutil
 
 
 verbose = True
-sqlURL = "https://raw.githubusercontent.com/kemar74/french-death/master/" + "mySQL-1.sql"
+sqlURL = "https://raw.githubusercontent.com/kemar74/french-death/master/" + "mySQL.sql"
 filepath_to_replace = "A:/Uni-Nantes/BDD evoluee/Projet/"
 db_name = "project_db"
 current_path = os.path.normcase(os.path.normpath(os.path.realpath(os.getcwd()))) + os.path.sep

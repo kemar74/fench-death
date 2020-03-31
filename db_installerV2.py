@@ -62,8 +62,8 @@ def execute_sql_file(mydb, fullStatements):
 				mydb.database = db_name
 				mycursor = mydb.cursor()
 				mycursor.execute(statement)
-			except:
-				print('error')
+			except mysql.connector.Error as err:
+				print(err)
 
 def get_csv_files(path):
 	files = []
@@ -75,8 +75,8 @@ def get_csv_files(path):
 				
 
 verbose = True
-sql1URL = "./" + "mySQL-1.sql"
-sql2URL = "./" + "mySQL-2.sql"
+sql1URL = "https://raw.githubusercontent.com/kemar74/french-death/master/" + "mySQL-1.sql"
+sql2URL = "https://raw.githubusercontent.com/kemar74/french-death/master/" + "mySQL-2.sql"
 db_name = "project_db"
 current_path = os.getcwd() + "/"
 
@@ -103,23 +103,23 @@ try:
 	print("Connected!")
 	mycursor = mydb.cursor()
 	#create table
-	print("Create tables")
+	print("Create tables...")
 	execute_sql_file(mydb, prepare_sql_file(sql1URL))
-	print("Import datas")
+	print("Import datas...")
 	files = get_csv_files(current_path)
 	for i,file in enumerate(files):
 		if verbose:
 			print(round((i+1)/len(files)*100), "%")
-		with open('C:/Users/Moi/Documents/Cours/bdde/french-death/' + file, encoding='utf-8') as csvfile:
+		with open(current_path + file, encoding='utf-8') as csvfile:
 			reader = csv.DictReader(csvfile, delimiter = ',')
 			sql_statement = prepare_statement(reader.fieldnames, file.replace(".csv", ""))
 			for i,row in enumerate(reader):
 				mycursor.executemany(sql_statement, prepare_row(reader.fieldnames, row))
 				mydb.commit()
 	#finish database
-	print("Finish database")
+	print("Finish database...")
 	execute_sql_file(mydb,prepare_sql_file(sql2URL))
-
+	print("All done!")
 except Exception as e:	
 	print("Error : ", e)
 
