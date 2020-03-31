@@ -14,7 +14,7 @@ verbose = True
 sqlURL = "./" + "mySQL.sql"
 filepath_to_replace = "A:/Uni-Nantes/BDD evoluee/Projet/"
 db_name = "project_db"
-current_path = os.path.normcase(os.path.normpath(os.path.realpath(os.getcwd()))) + os.path.sep
+current_path = os.getcwd() + "/"
 try:
 	print("Opening database...")
 	login = open("db_login.txt", "r").readlines()
@@ -49,7 +49,7 @@ try:
 	if verbose : 
 		print("Reading file...")
 	for i,line in enumerate(lines):
-		line = line.replace(filepath_to_replace, current_path).replace("\\", "\\\\")
+		line = line.replace(filepath_to_replace, current_path).replace("\\", "/")
 		if line.strip().startswith('--'):  # ignore sql comment lines
 			continue
 		if not line.strip().endswith(';'):  # keep appending lines that don't end in ';'
