@@ -85,7 +85,7 @@ CREATE TABLE `project_db`.`name_geographic_information` (
 `code_insee` VARCHAR(16) NOT NULL,
 `latitude` VARCHAR(16) NULL,
 `longitude` VARCHAR(16) NULL,
-`eloignement` FLOAT NULL,
+`éloignement` FLOAT NULL,
 PRIMARY KEY(`code_insee`))
 ENGINE = MyISAM;
 
@@ -99,7 +99,7 @@ CREATE TABLE `project_db`.`deaths` (
 `pays_naissance` VARCHAR(128) NULL , 
 `date_deces` DATE NOT NULL , 
 `code_lieu_deces` VARCHAR(8) NOT NULL , 
-`numero_acte_deces` INT NULL,
+`num_acte_deces` INT NULL,
 INDEX `IND_SEXE` (`sexe`),
 INDEX `IND_DATE_DECES` (`date_deces`),
 INDEX `IND_CODE_DECES` (`code_lieu_deces`),
@@ -115,18 +115,64 @@ CREATE TABLE `project_db`.`age` (
 PRIMARY KEY(`id_age`))
 ENGINE = MyISAM;
 
--- Normalisation des codes INSEE
-UPDATE name_geographic_information SET code_insee = CONCAT("0", code_insee) WHERE CHAR_LENGTH(code_insee) = 4;
-
--- Creation d'une table population 7 fois plus petite (pas de MOCO)
 CREATE TABLE `project_db`.`population_no_moco` ( 
 `CODGEO` VARCHAR(8) NOT NULL, 
-`LIBGEO` VARCHAR(128) NULL,
+`LIBGEO` VARCHAR(128) NULL, 
 `AGEQ80_17` INT NOT NULL, 
 `SEXE` INT NOT NULL, 
 `NB` INT NULL,
 PRIMARY KEY (`CODGEO`, `AGEQ80_17`, `SEXE`)) 
 ENGINE = MyISAM;
+
+--Import des données
+
+LOAD DATA INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/base_etablissement_par_tranche_effectif.csv'
+INTO TABLE project_db.base_etablissement_par_tranche_effectif
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/name_geographic_information.csv'
+IGNORE
+INTO TABLE project_db.name_geographic_information
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/net_salary_per_town_categories.csv'
+INTO TABLE project_db.net_salary_per_town_categories
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/population.csv'
+IGNORE
+INTO TABLE project_db.population
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+
+
+
+-- /!\ Have a break ;) /!\
+
+LOAD DATA LOCAL INFILE 'A:/Uni-Nantes/BDD evoluee/Projet/export.csv'
+INTO TABLE project_db.deaths
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+
+-- Normalisation des codes INSEE
+UPDATE name_geographic_information SET code_insee = CONCAT("0", code_insee) WHERE CHAR_LENGTH(code_insee) = 4;
+
+-- Creation d'une table population 7 fois plus petite (pas de MOCO)
 
 INSERT IGNORE INTO `project_db`.`population_no_moco` 
 SELECT `CODGEO`, LIBGEO, AGEQ80_17, SEXE, SUM(NB) AS NB 
