@@ -2,7 +2,8 @@ import csv
 import mysql.connector
 import os
 import unicodedata
-	
+import requests
+
 def strip_accents(text):
     return str(unicodedata.normalize('NFD', text).encode('ascii', 'ignore').decode("utf-8"))
 	

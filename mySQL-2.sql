@@ -2,14 +2,6 @@
 UPDATE name_geographic_information SET code_insee = CONCAT("0", code_insee) WHERE CHAR_LENGTH(code_insee) = 4;
 
 -- Creation d'une table population 7 fois plus petite (pas de MOCO)
-CREATE TABLE `project_db`.`population_no_moco` ( 
-`CODGEO` VARCHAR(8) NOT NULL, 
-`LIBGEO` VARCHAR(128) NULL,
-`AGEQ80_17` INT NOT NULL, 
-`SEXE` INT NOT NULL, 
-`NB` INT NULL,
-PRIMARY KEY (`CODGEO`, `AGEQ80_17`, `SEXE`)) 
-ENGINE = MyISAM;
 
 INSERT IGNORE INTO `project_db`.`population_no_moco` 
 SELECT `CODGEO`, LIBGEO, AGEQ80_17, SEXE, SUM(NB) AS NB 

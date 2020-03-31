@@ -114,3 +114,12 @@ CREATE TABLE `project_db`.`age` (
 `age80_17` INT,
 PRIMARY KEY(`id_age`))
 ENGINE = MyISAM;
+
+CREATE TABLE `project_db`.`population_no_moco` ( 
+`CODGEO` VARCHAR(8) NOT NULL, 
+`LIBGEO` VARCHAR(128) NULL,
+`AGEQ80_17` INT NOT NULL, 
+`SEXE` INT NOT NULL, 
+`NB` INT NULL,
+PRIMARY KEY (`CODGEO`, `AGEQ80_17`, `SEXE`)) 
+ENGINE = MyISAM;

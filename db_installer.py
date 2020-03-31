@@ -10,10 +10,8 @@ import shutil
 # Thanks to nonbeing (https://stackoverflow.com/a/19159041/9863298)
 
 
-
-
 verbose = True
-sqlURL = "https://raw.githubusercontent.com/kemar74/french-death/master/" + "mySQL.sql"
+sqlURL = "./" + "mySQL.sql"
 filepath_to_replace = "A:/Uni-Nantes/BDD evoluee/Projet/"
 db_name = "project_db"
 current_path = os.path.normcase(os.path.normpath(os.path.realpath(os.getcwd()))) + os.path.sep
@@ -50,7 +48,7 @@ try:
 	fullStatements = []
 	if verbose : 
 		print("Reading file...")
-	for line in lines:
+	for i,line in enumerate(lines):
 		line = line.replace(filepath_to_replace, current_path).replace("\\", "\\\\")
 		if line.strip().startswith('--'):  # ignore sql comment lines
 			continue
