@@ -8,7 +8,7 @@ import requests
 def prepare_sql_file(sqlURL):
 	statement = ""
 	try:
-		lines = open(sqlURL)
+		lines = open(sqlURL, "r",encoding="utf-8")
 	except:
 		lines = requests.get(url=sqlURL).text.split("\r\n")
 	fullStatements = []
@@ -22,6 +22,7 @@ def prepare_sql_file(sqlURL):
 		else:  # when you get a line ending in ';' then exec statement and reset for next statement
 			fullStatements.append(statement + " " + line)
 			statement = ""
+	lines.close()
 	return fullStatements
 	
 def execute_sql_file(mydb, fullStatements):
@@ -77,9 +78,9 @@ try:
 	print("Connected!")
 	mycursor = mydb.cursor()
 	#create table
-
 	print("Create tables...")
 	execute_sql_file(mydb, prepare_sql_file(sql1URL))
+	#import data
 	print("Import datas...")
 	files = get_csv_files(current_path)
 	for i,file in enumerate(files):
@@ -90,8 +91,6 @@ try:
 		mycursor.execute(statement)
 	#finish database
 	print("Finish database...")
-	#normalize insee code
-	mycursor.execute("UPDATE `project_db`.`name_geographic_information` SET `code_insee` = CONCAT(\"0\", code_insee) WHERE CHAR_LENGTH(code_insee) = 4;")
 	execute_sql_file(mydb,prepare_sql_file(sql2URL))
 	
 	print("All done!")
