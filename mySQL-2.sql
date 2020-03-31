@@ -1,6 +1,4 @@
-﻿UPDATE `project_db`.`name_geographic_information` SET `code_insee` = CONCAT("0", code_insee) WHERE CHAR_LENGTH(code_insee) = 4;
-
--- Creation d'une table population 7 fois plus petite (pas de MOCO)
+﻿-- Creation d'une table population 7 fois plus petite (pas de MOCO)
 
 INSERT IGNORE INTO `project_db`.`population_no_moco` 
 SELECT `CODGEO`, LIBGEO, AGEQ80_17, SEXE, SUM(NB) AS NB 

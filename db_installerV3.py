@@ -48,8 +48,8 @@ def get_csv_files(path):
 				
 
 verbose = True
-sql1URL = "https://raw.githubusercontent.com/kemar74/french-death/master/" + "mySQL-1.sql"
-sql2URL = "https://raw.githubusercontent.com/kemar74/french-death/master/" + "mySQL-2.sql"
+sql1URL = "./" + "mySQL-1.sql"
+sql2URL = "./" + "mySQL-2.sql"
 db_name = "project_db"
 current_path = os.getcwd() + "\\"
 current_path = current_path.replace("\\","/")
@@ -77,6 +77,7 @@ try:
 	print("Connected!")
 	mycursor = mydb.cursor()
 	#create table
+
 	print("Create tables...")
 	execute_sql_file(mydb, prepare_sql_file(sql1URL))
 	print("Import datas...")
@@ -89,7 +90,10 @@ try:
 		mycursor.execute(statement)
 	#finish database
 	print("Finish database...")
+	#normalize insee code
+	mycursor.execute("UPDATE `project_db`.`name_geographic_information` SET `code_insee` = CONCAT(\"0\", code_insee) WHERE CHAR_LENGTH(code_insee) = 4;")
 	execute_sql_file(mydb,prepare_sql_file(sql2URL))
+	
 	print("All done!")
 except Exception as e:	
 	print("Error : ", e)
