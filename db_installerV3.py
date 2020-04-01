@@ -1,4 +1,3 @@
-import csv
 import mysql.connector
 import os
 import unicodedata
