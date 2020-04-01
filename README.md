@@ -54,11 +54,12 @@ Trouvez le fichier my.ini, puis commentez la ligne "secure_file_serv=..." en ins
   
 *Enfin, relancez votre serveur local XAMPP ou WAMP*  
   
-Lancez l'executable "db_installer.exe", patientez (cela peut durer au moins 10 minutes).
+Lancez l'executable "db_installer3.exe", patientez (cela peut durer au moins 10 minutes).
 Sur Mac OS ou Linux il faut exécuter le script python. En amont il faudra installer les packages suivant :
 ```
 $ pip install mysql.connector
 $ pip install requests
+$ python db_installerV3.py
 ```
 Si une erreur apparait lors de l'installation (du type "[WARN] MySQLError during execute statement", recopiez la commande sur PhpMyAdmin (http://localhost/phpmyadmin/db_sql.php?db=project_db) pour l'executer manuellement, puis continuez le programme en appuyant sur < ENTRER >.   
 Les données sont là!  
